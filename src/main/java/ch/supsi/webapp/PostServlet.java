@@ -30,12 +30,6 @@ public class PostServlet extends HttpServlet
 
         ObjectMapper mapper = new ObjectMapper();
 
-        /*for(int i=0;i<posts.size();i++)
-        {
-            String json = mapper.writeValueAsString(posts.get(i));
-            res.getWriter().println(json);
-        }*/
-
         res.setStatus(HttpServletResponse.SC_OK);
         String json = mapper.writeValueAsString(posts);
         res.getWriter().println(json);
@@ -44,11 +38,22 @@ public class PostServlet extends HttpServlet
     @Override
     protected  void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
-        BlogPost post = new BlogPost(req.getParameter("title"), req.getParameter("text"), req.getParameter("author"));
+        //questa roba se ricevo i parametri
+
+        ObjectMapper mapper = new ObjectMapper();
+        BlogPost post;
+
+        if(req.getHeader("Content-Type").equals("application/x-www-form-urlencoded"))
+        {
+            post = new BlogPost(req.getParameter("title"), req.getParameter("text"), req.getParameter("author"));
+        }
+        else
+        {
+            post = mapper.readValue(req.getReader(), BlogPost.class);
+        }
 
         posts.add(post);
 
-        ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(post);
 
         res.setStatus(HttpServletResponse.SC_OK);
