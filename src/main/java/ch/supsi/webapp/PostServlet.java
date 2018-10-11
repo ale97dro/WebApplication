@@ -51,7 +51,7 @@ public class PostServlet extends HttpServlet
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(post);
 
-        res.getWriter().println("200 OK");
+        res.setStatus(HttpServletResponse.SC_OK);
         res.getWriter().println(json);
     }
 }
