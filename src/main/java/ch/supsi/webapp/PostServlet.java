@@ -36,7 +36,7 @@ public class PostServlet extends HttpServlet
             res.getWriter().println(json);
         }*/
 
-        res.getWriter().println("200 OK");
+        res.setStatus(HttpServletResponse.SC_OK);
         String json = mapper.writeValueAsString(posts);
         res.getWriter().println(json);
     }
