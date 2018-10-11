@@ -36,6 +36,7 @@ public class PostServlet extends HttpServlet
             res.getWriter().println(json);
         }*/
 
+        res.getWriter().println("200 OK");
         String json = mapper.writeValueAsString(posts);
         res.getWriter().println(json);
     }
@@ -50,6 +51,7 @@ public class PostServlet extends HttpServlet
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(post);
 
+        res.getWriter().println("200 OK");
         res.getWriter().println(json);
     }
 }
