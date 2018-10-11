@@ -6,13 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87b93872-3514-4ba2-aad3-b6a02856ecf3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/supsi/webapp/PostServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/supsi/webapp/PostServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ch/supsi/webapp/PostServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ch/supsi/webapp/PostServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/web.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/web.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/web/WEB-INF/classes/ch/supsi/webapp/PostServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/web/WEB-INF/classes/ch/supsi/webapp/PostServlet.class" afterDir="false" />
-    </list>
+    <list default="true" id="87b93872-3514-4ba2-aad3-b6a02856ecf3" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +56,7 @@
     <session id="644723985">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.7" value="2" />
@@ -104,8 +98,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ch/supsi/webapp/PostServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+            <state relative-caret-position="770">
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -170,9 +164,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -393,12 +388,12 @@
       <workItem from="1539071008117" duration="999000" />
       <workItem from="1539072475578" duration="769000" />
       <workItem from="1539073278345" duration="21000" />
-      <workItem from="1539081018660" duration="1277000" />
+      <workItem from="1539081018660" duration="1524000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6813000" />
+    <option name="totallyTimeSpent" value="7060000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -414,7 +409,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3347779" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3347779" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -471,8 +466,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/supsi/webapp/PostServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        <state relative-caret-position="770">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
