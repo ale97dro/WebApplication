@@ -20,6 +20,12 @@ public class BlogPost
         this.author=author;
     }
 
+    public BlogPost(String title, String author)
+    {
+        this.title = title;
+        this.author = author;
+    }
+
     public String getTitle()
     {
         return title;
