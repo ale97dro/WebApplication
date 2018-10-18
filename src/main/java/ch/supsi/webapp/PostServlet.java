@@ -140,7 +140,7 @@ public class PostServlet extends HttpServlet
 
         String json = mapper.writeValueAsString(new_post);
 
-        res.setStatus(HttpServletResponse.SC_CREATED);
+        //res.setStatus(HttpServletResponse.SC_CREATED);
         res.setContentType("application/json");
         res.getWriter().println(json);
     }
@@ -215,23 +215,29 @@ public class PostServlet extends HttpServlet
             if((b.getAuthor().equals(to_update.getAuthor())) && (b.getTitle().equals(to_update.getTitle())))
             {
                 updated = true;
-
-                BlogPost updated_post = readJsonBlogPost(req);
-
-                if(updated_post.getTitle() != null)
-                    b.setTitle(updated_post.getTitle());
-                if(updated_post.getAuthor() != null)
-                    b.setAuthor(updated_post.getAuthor());
-                if(updated_post.getText() != null)
-                    b.setText(updated_post.getText());
+                updatePostWithPatch(b, readJsonBlogPost(req));
             }
-
         }
 
         if(updated)
             res.setStatus(HttpServletResponse.SC_OK);
         else
             res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    }
+
+    /**
+     * Aggiorna gli attributi del blogpost salvato con quelli nuovi
+     * @param to_update
+     * @param new_data
+     */
+    private void updatePostWithPatch(BlogPost to_update, BlogPost new_data)
+    {
+        if(new_data.getTitle() != null)
+            to_update.setTitle(new_data.getTitle());
+        if(new_data.getAuthor() != null)
+            to_update.setAuthor(new_data.getAuthor());
+        if(new_data.getText() != null)
+            to_update.setText(new_data.getText());
     }
 
     /**
