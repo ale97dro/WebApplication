@@ -200,8 +200,7 @@ public class PostServlet extends HttpServlet
             super.service(req, resp);
     }
 
-    private  void doPatch(HttpServletRequest req, HttpServletResponse res)
-    {
+    private  void doPatch(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String[] url = req.getRequestURL().toString().split("/");
 
         if(url.length != 6)
@@ -224,12 +223,14 @@ public class PostServlet extends HttpServlet
             {
                 updated = true;
 
-                if(req.getParameter("title") != null)
-                    b.setTitle(req.getParameter("title"));
-                if(req.getParameter("author") != null)
-                    b.setAuthor(req.getParameter("author"));
-                if(req.getParameter("text") != null)
-                    b.setText(req.getParameter("text"));
+                BlogPost updated_post = readJsonBlogPost(req);
+
+                if(updated_post.getTitle() != null)
+                    b.setTitle(updated_post.getTitle());
+                if(updated_post.getAuthor() != null)
+                    b.setAuthor(updated_post.getAuthor());
+                if(updated_post.getText() != null)
+                    b.setText(updated_post.getText());
             }
 
         }
@@ -238,6 +239,18 @@ public class PostServlet extends HttpServlet
             res.setStatus(HttpServletResponse.SC_OK);
         else
             res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    }
+
+    private BlogPost readJsonBlogPost(HttpServletRequest req)
+    {
+        ObjectMapper m = new ObjectMapper();
+
+        try {
+            return m.readValue(req.getReader(), BlogPost.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     protected void doDelete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
