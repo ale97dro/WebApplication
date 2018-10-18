@@ -88,7 +88,7 @@ public class PostServlet extends HttpServlet
                 if(b.getAuthor().equals(author))
                     author_posts.add(b);
 
-            prepareResponse(res, author_posts);
+            prepareGetResponse(res, author_posts);
             return;
         }
 
@@ -102,14 +102,14 @@ public class PostServlet extends HttpServlet
                 if((b.getAuthor().equals(author)) && (b.getTitle().equals(title)))
                     author_posts.add(b);
 
-            prepareResponse(res, author_posts);
+            prepareGetResponse(res, author_posts);
             return;
         }
 
         res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
     }
 
-    private void prepareResponse(HttpServletResponse res, List<BlogPost> author_posts) throws IOException {
+    private void prepareGetResponse(HttpServletResponse res, List<BlogPost> author_posts) throws IOException {
         String json;
         if(author_posts.size() != 0)
         {
@@ -125,21 +125,20 @@ public class PostServlet extends HttpServlet
     @Override
     protected  void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
     {
-        //ObjectMapper mapper = new ObjectMapper();
-        BlogPost post;
+        BlogPost new_post;
 
         if(req.getHeader("Content-Type").equals("application/x-www-form-urlencoded"))
         {
-            post = new BlogPost(req.getParameter("title"), req.getParameter("text"), req.getParameter("author"));
+            new_post = new BlogPost(req.getParameter("title"), req.getParameter("text"), req.getParameter("author"));
         }
         else
         {
-            post = mapper.readValue(req.getReader(), BlogPost.class);
+            new_post = mapper.readValue(req.getReader(), BlogPost.class);
         }
 
-        posts.add(post);
+        posts.add(new_post);
 
-        String json = mapper.writeValueAsString(post);
+        String json = mapper.writeValueAsString(new_post);
 
         res.setStatus(HttpServletResponse.SC_CREATED);
         res.setContentType("application/json");
@@ -150,15 +149,6 @@ public class PostServlet extends HttpServlet
     {
         BlogPost post;
         String[] url = req.getRequestURL().toString().split("/");
-
-
-        if(req.getParameterMap().keySet().size()!=3) {
-            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            System.out.println("Errore");
-            return;
-        }
-
-        BlogPost new_post = new BlogPost(req.getParameter("title"), req.getParameter("text"), req.getParameter("author"));
 
         if(url.length != 6)
         {
@@ -178,9 +168,12 @@ public class PostServlet extends HttpServlet
 
             if((b.getTitle().equals(title)) && (b.getAuthor().equals(author)))
             {
-                b.setAuthor(new_post.getAuthor());
-                b.setText(new_post.getText());
-                b.setTitle(new_post.getTitle());
+                BlogPost updated_post = readJsonBlogPost(req);
+
+                b.setAuthor(updated_post.getAuthor());
+                b.setTitle(updated_post.getTitle());
+                b.setText(updated_post.getText());
+
                 updated = true;
             }
         }
@@ -241,6 +234,11 @@ public class PostServlet extends HttpServlet
             res.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 
+    /**
+     * Crea blogpost a partire dal corpo json della richiesta
+     * @param req
+     * @return
+     */
     private BlogPost readJsonBlogPost(HttpServletRequest req)
     {
         ObjectMapper m = new ObjectMapper();
