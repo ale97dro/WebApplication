@@ -31,7 +31,7 @@ public class BlogPostController {
     public ResponseEntity<BlogPost> post(@RequestBody BlogPost post) {
         if ((post.getAuthor() != null) && (post.getTitle() != null) && (post.getText() != null)) {
             post.setId(posts.size());
-            System.out.print("ciao");
+            //System.out.print("ciao");
             posts.add(post);
             return new ResponseEntity<>(post, HttpStatus.OK);
         } else
@@ -71,7 +71,7 @@ public class BlogPostController {
             if (b.getId() == id)
             {
                 posts.remove(b);
-                return new ResponseEntity<>("\"success\": true", HttpStatus.OK);
+                return new ResponseEntity<>("{\"success\": true}", HttpStatus.OK);
             }
         }
 
