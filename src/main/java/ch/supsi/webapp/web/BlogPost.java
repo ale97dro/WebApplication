@@ -1,10 +1,20 @@
 package ch.supsi.webapp.web;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "BLOGPOST")
 public class BlogPost
 {
+    @Id
+    @Column(name = "id")
     private int id;
     private String author;
     private String title;
+    @Column(columnDefinition = "Text")
     private String text;
 
     public BlogPost()

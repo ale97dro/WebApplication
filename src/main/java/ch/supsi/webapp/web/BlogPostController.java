@@ -48,14 +48,12 @@ public class BlogPostController {
         {
             if(b.getId() == id)
             {
-                {
-                    b.setId(post.getId());
-                    b.setAuthor(post.getAuthor());
-                    b.setTitle(post.getTitle());
-                    b.setText(post.getText());
+                b.setId(post.getId());
+                b.setAuthor(post.getAuthor());
+                b.setTitle(post.getTitle());
+                b.setText(post.getText());
 
-                    return new ResponseEntity<>(b, HttpStatus.OK);
-                }
+                return new ResponseEntity<>(b, HttpStatus.OK);
             }
         }
 
