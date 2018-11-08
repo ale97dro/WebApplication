@@ -3,6 +3,7 @@ package ch.supsi.webapp.web;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,6 +11,10 @@ import java.util.List;
 @Repository
 public interface BlogPostRepository extends JpaRepository<BlogPost, Integer>
 {
-    @Query("SELECT b FROM BlogPost b ")
-    List<BlogPost> list();
+//    @Query("SELECT b FROM BlogPost b ")
+//    List<BlogPost> postsList();
+//
+//    //@Query("INSERT INTO BlogPost b; select b FROM BlogPost b WHERE b.")
+//    @Query("SELECT b FROM BlogPost b")
+//    BlogPost addNewBlogPost(@Param(value = "post") BlogPost post);
 }

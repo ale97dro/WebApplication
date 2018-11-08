@@ -1,5 +1,6 @@
 package ch.supsi.webapp.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,15 @@ import java.util.List;
 public class BlogPostController {
     private List<BlogPost> posts = new ArrayList<>();
 
+    @Autowired
+    private BlogPostService blogPostService;
+
+
     @RequestMapping(value = "/blogposts", method = RequestMethod.GET)
     public List<BlogPost> getAll() {
         //System.out.println("");
-        return posts;
+        //return posts;
+        return blogPostService.getAll();
     }
 
     @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.GET)
@@ -28,13 +34,13 @@ public class BlogPostController {
     }
 
     @RequestMapping(value = "/blogposts", method = RequestMethod.POST)
-    public ResponseEntity<BlogPost> post(@RequestBody BlogPost post) {
-        if ((post.getAuthor() != null) && (post.getTitle() != null) && (post.getText() != null)) {
-            post.setId(posts.size());
-            //System.out.print("ciao");
-            posts.add(post);
-            return new ResponseEntity<>(post, HttpStatus.OK);
-        } else
+    public ResponseEntity<BlogPost> post(@RequestBody BlogPost post)
+    {
+        BlogPost newPost = blogPostService.addNewBlogPost(post);
+
+        if(newPost != null)
+            return new ResponseEntity<>(post, HttpStatus.CREATED);
+        else
             return new ResponseEntity<>(post, HttpStatus.BAD_REQUEST);
     }
 
@@ -59,7 +65,6 @@ public class BlogPostController {
 
         return new ResponseEntity<>((BlogPost) null, HttpStatus.NOT_FOUND);
     }
-
 
     @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> delete(@PathVariable int id)
