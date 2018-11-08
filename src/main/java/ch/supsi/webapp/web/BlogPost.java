@@ -1,9 +1,6 @@
 package ch.supsi.webapp.web;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "BLOGPOST")
@@ -11,6 +8,7 @@ public class BlogPost
 {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     private String author;
     private String title;

@@ -18,17 +18,16 @@ public class BlogPostController {
 
     @RequestMapping(value = "/blogposts", method = RequestMethod.GET)
     public List<BlogPost> getAll() {
-        //System.out.println("");
-        //return posts;
         return blogPostService.getAll();
     }
 
     @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.GET)
-    public ResponseEntity<BlogPost> getPost(@PathVariable int id) {
-        for (BlogPost b : posts) {
-            if (b.getId() == id)
-                return new ResponseEntity<>(b, HttpStatus.OK);
-        }
+    public ResponseEntity<BlogPost> getPost(@PathVariable int id)
+    {
+        BlogPost post = blogPostService.getPost(id);
+
+        if(post != null)
+            return new ResponseEntity<>(post, HttpStatus.OK);
 
         return new ResponseEntity<>((BlogPost) null, HttpStatus.NOT_FOUND);
     }
@@ -40,43 +39,32 @@ public class BlogPostController {
 
         if(newPost != null)
             return new ResponseEntity<>(post, HttpStatus.CREATED);
-        else
-            return new ResponseEntity<>(post, HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(post, HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.PUT)
     public ResponseEntity<BlogPost> put(@RequestBody BlogPost post, @PathVariable int id)
     {
-        if (!((post.getAuthor() != null) && (post.getTitle() != null) && (post.getText() != null)))
+        if(!blogPostService.isValidBlogPost(post))
             return new ResponseEntity<>((BlogPost) null, HttpStatus.BAD_REQUEST);
 
-        for(BlogPost b : posts)
-        {
-            if(b.getId() == id)
-            {
-                b.setId(post.getId());
-                b.setAuthor(post.getAuthor());
-                b.setTitle(post.getTitle());
-                b.setText(post.getText());
+        BlogPost updatedPost = blogPostService.updateBlogPost(post, id);
 
-                return new ResponseEntity<>(b, HttpStatus.OK);
-            }
-        }
+        if(updatedPost != null)
+            return new ResponseEntity<>(updatedPost, HttpStatus.OK);
 
         return new ResponseEntity<>((BlogPost) null, HttpStatus.NOT_FOUND);
     }
 
+
     @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> delete(@PathVariable int id)
     {
-        for(BlogPost b : posts)
-        {
-            if (b.getId() == id)
-            {
-                posts.remove(b);
-                return new ResponseEntity<>("{\"success\": true}", HttpStatus.OK);
-            }
-        }
+        String result = blogPostService.deleteBlogPost(id);
+
+        if(result != null)
+            return new ResponseEntity<>(result, HttpStatus.OK);
 
         return new ResponseEntity<>((String) null, HttpStatus.NOT_FOUND);
     }
