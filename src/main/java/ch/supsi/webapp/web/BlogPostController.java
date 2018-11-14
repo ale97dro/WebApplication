@@ -57,7 +57,6 @@ public class BlogPostController {
         return new ResponseEntity<>((BlogPost) null, HttpStatus.NOT_FOUND);
     }
 
-
     @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> delete(@PathVariable int id)
     {
