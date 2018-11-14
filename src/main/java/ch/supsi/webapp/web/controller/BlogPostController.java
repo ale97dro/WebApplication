@@ -1,5 +1,7 @@
-package ch.supsi.webapp.web;
+package ch.supsi.webapp.web.controller;
 
+import ch.supsi.webapp.web.BlogPostService;
+import ch.supsi.webapp.web.model.BlogPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

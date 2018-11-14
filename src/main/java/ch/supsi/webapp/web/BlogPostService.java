@@ -1,5 +1,11 @@
 package ch.supsi.webapp.web;
 
+import ch.supsi.webapp.web.model.BlogPost;
+import ch.supsi.webapp.web.model.Utente;
+import ch.supsi.webapp.web.repository.BlogPostRepository;
+import ch.supsi.webapp.web.repository.CategoriaRepository;
+import ch.supsi.webapp.web.repository.RuoloRepository;
+import ch.supsi.webapp.web.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +17,12 @@ public class BlogPostService
 {
     @Autowired
     private BlogPostRepository blogPostRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+    @Autowired
+    private RuoloRepository ruoloRepository;
+    @Autowired
+    private UtenteRepository utenteRepository;
 
     public List<BlogPost> getAll()
     {
@@ -46,6 +58,7 @@ public class BlogPostService
             post.setAuthor(newPost.getAuthor());
             post.setTitle(newPost.getTitle());
             post.setText(newPost.getText());
+            post.setCategory(newPost.getCategory());
 
             blogPostRepository.save(post);
         }
