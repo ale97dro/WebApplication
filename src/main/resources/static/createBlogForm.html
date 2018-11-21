@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+            <meta charset="UTF-8">
+            <meta name="description" content="Insert blogpost">
+            <meta name="author" content="Alessandro Bianchi">
+        <title>Insert new blogpost</title>
+    </head>
+
+    <body>
+        <form method="post">
+            <table border="2">
+                <tr>
+                    <td colspan="2">Insert new blogpost</td>
+                </tr>
+                <tr>
+                    <td>Title</td>
+                    <td>
+                        <input type="text" name="title" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select>
+                            <option value="1">Sport</option>
+                            <option value="2">Cultura</option>
+                            <option value="3">Scienza</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Text</td>
+                    <td>   
+                        <textarea name="message" rows="10" cols="30">
+                            Blogpost text
+                        </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Insert" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+
+</html>
