@@ -14,11 +14,10 @@ public class BlogPost
 
     @ManyToOne
     @JoinColumn(name="fk_author")
-    private Utente author; //todo annotare
-
+    private Utente author;
     @ManyToOne
     @JoinColumn(name="fk_category")
-    private Categoria category; //todo annotare
+    private Categoria category;
 
 
     private String title;
