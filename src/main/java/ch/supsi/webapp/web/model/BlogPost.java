@@ -1,6 +1,7 @@
 package ch.supsi.webapp.web.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "BLOGPOST")
@@ -23,6 +24,7 @@ public class BlogPost
     private String title;
     @Column(columnDefinition = "Text")
     private String text;
+    private Date date;
 
     public BlogPost()
     {
@@ -105,5 +107,15 @@ public class BlogPost
     public Categoria getCategory()
     {
         return category;
+    }
+
+    public void setDate(Date date)
+    {
+        this.date = date;
+    }
+
+    public Date getDate()
+    {
+        return date;
     }
 }
