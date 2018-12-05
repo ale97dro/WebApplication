@@ -22,7 +22,7 @@
             <article class="article">
                 <p th:text="${post.getTitle()}"> titolo</p><br>
                 <p th:text="'Author: ' + ${post.getAuthor()}">autore</p><br>
-                Date: data<br>
+                <p>Date: <time th:datetime="${post.getDate()}" th:text="${post.getDate()}"></time></p><br>
                 <p th:text="'Category: ' + ${post.getCategory().getName()}">categoria</p><br>
                 <p th:text="'Text: ' + ${post.getText()}">Testo</p><br>
             </article>
