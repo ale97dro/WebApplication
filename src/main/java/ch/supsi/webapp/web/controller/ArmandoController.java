@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,22 +23,10 @@ public class ArmandoController {
     private BlogPostRepository blogPostRepository;
 
     @GetMapping("/")
-    public String getIndex()
+    public String getIndex(Model model)
     {
-        //blogPostService.getAll();
+        model.addAttribute("allPosts", blogPostService.getAll());
         return "index";
-    }
-
-    @ModelAttribute("msg")
-    public String ciao()
-    {
-        return "ciao";
-    }
-
-    @ModelAttribute("allPosts")
-    public List<BlogPost> getAll()
-    {
-        return blogPostRepository.findAll();
     }
 
 
