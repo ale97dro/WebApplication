@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="description" content="Index of blogpost">
@@ -26,8 +26,10 @@
 
         <br>
 
+        <p th:text="${msg}">Welcome everyone!</p>
+
         <section class="section">
-            <article class="article">
+            <!--<article class="article">
                 Blogpost 1 ...
             </article>
 
@@ -37,7 +39,12 @@
 
             <article class="article">
                 Blogpost 3 ...
+            </article>-->
+
+            <article th:each="post : ${allPosts}" th:text="${post.getId()}">
+                Blogpost
             </article>
+
         </section>
 
         <br>

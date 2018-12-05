@@ -8,6 +8,7 @@ import ch.supsi.webapp.web.repository.RuoloRepository;
 import ch.supsi.webapp.web.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,8 @@ public class BlogPostService
     @Autowired
     private UtenteRepository utenteRepository;
 
+    //TODO: taggare questi metodi come modelAttribute come fatto in Armando
+    @ModelAttribute("allPosts")
     public List<BlogPost> getAll()
     {
         return blogPostRepository.findAll();
