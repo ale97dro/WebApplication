@@ -76,4 +76,9 @@ public class Utente
     {
         return id;
     }
+
+    public String toString()
+    {
+        return name;
+    }
 }

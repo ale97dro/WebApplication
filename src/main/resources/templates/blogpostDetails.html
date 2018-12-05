@@ -6,25 +6,25 @@
         <meta name="description" content="See all blogpost">
         <meta name="author" content="Alessandro Bianchi">
         <title>Insert new blogpost</title>
-        <link rel="stylesheet" type="text/css" href="common.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="blogpostDetails.css" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{../common.css}" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{../blogpostDetails.css}" media="screen" />
     </head>
 
     <body class="background">
 
         <header class="header">
-            <a href="index.html">
-                <img src="logo.jpg" alt="logo">
+            <a th:href="@{/}">
+                <img th:src="@{../logo.jpg}" alt="logo">
             </a>
         </header>
 
         <section>
             <article class="article">
-                <a href="#">Title: titolo</a><br>
-                Author: autore<br>
+                <p th:text="${post.getTitle()}"> titolo</p><br>
+                <p th:text="'Author: ' + ${post.getAuthor()}">autore</p><br>
                 Date: data<br>
-                Category: categoria<br>
-                Text: testo<br>
+                <p th:text="'Category: ' + ${post.getCategory().getName()}">categoria</p><br>
+                <p th:text="'Text: ' + ${post.getText()}">Testo</p><br>
             </article>
             <br>
         </section>

@@ -18,25 +18,13 @@
             </a>
         </header>
 
-        <section>
-            <article class="article">
-                <a href="blogpostDetails.html">Title: titolo</a><br>
-                Author: autore<br>
-                Date: data<br>
-                Category: categoria<br>
-                Text: testo<br>
-            </article>
-            <br>
-            <article class="article">
-                <a href="blogpostDetails.html">Title: titolo</a><br>
-                Author: autore<br>
-                Date: data<br>
-                Category: categoria<br>
-                Text: testo<br>
-            </article>
+        <section class="section" th:each="post : ${allPosts}">
+            <a th:href="@{'/blog/' + ${post.getId()}}">
+                <article class="article" th:text="${post.getTitle()}">
+                    Blogpost
+                </article>
+            </a>
         </section>
 
-
     </body>
-
 </html>

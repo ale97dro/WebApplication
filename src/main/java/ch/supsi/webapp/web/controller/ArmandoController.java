@@ -4,6 +4,7 @@ import ch.supsi.webapp.web.BlogPostService;
 import ch.supsi.webapp.web.model.BlogPost;
 import ch.supsi.webapp.web.repository.BlogPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,26 @@ public class ArmandoController {
     {
         model.addAttribute("allPosts", blogPostService.getAll());
         return "index";
+    }
+
+    @GetMapping("/blog/{id}")
+    public String getBlogPost(@PathVariable int id, Model model)
+    {
+        model.addAttribute("post", blogPostService.getPost(id));
+        return "blogpostDetails";
+    }
+
+    @GetMapping("/all")
+    public String getAllBlogPost(Model model)
+    {
+        model.addAttribute("allPosts", blogPostService.getAll());
+        return "allBlogpost";
+    }
+
+    @GetMapping("/blog/new")
+    public String getCreateBlogpost()
+    {
+        return "createBlogForm";
     }
 
 

@@ -12,23 +12,21 @@
 
     <body class="background">
         <header class="header">
-                <a href="index.html">
+            <a th:href="@{/}">
                     <img src="logo.jpg" alt="logo">
                 </a>
         </header>
 
         <nav>
             <ul class="nav">
-                <li class="navVoice"><a class="navFont" href="createBlogForm.html">Insert new blogpost</a></li>
-                <li class="navVoice"><a class="navFont" href="allBlogpost.html">See all blogpost</a></li>
+                <li class="navVoice"><a class="navFont" th:href="@{'/blog/new'}">Insert new blogpost</a></li>
+                <li class="navVoice"><a class="navFont" th:href="@{'/all'}">See all blogpost</a></li>
             </ul>
         </nav>
 
         <br>
 
-        <p th:text="${msg}">Welcome everyone!</p>
-
-        <section class="section">
+        <section class="section" th:each="post : ${allPosts}">
             <!--<article class="article">
                 Blogpost 1 ...
             </article>
@@ -41,10 +39,11 @@
                 Blogpost 3 ...
             </article>-->
 
-            <article th:each="post : ${allPosts}" th:text="${post.getId()}">
+            <a th:href="@{'/blog/' + ${post.getId()}}">
+                <article class="article" th:text="${post.getTitle()}">
                 Blogpost
-            </article>
-
+                </article>
+            </a>
         </section>
 
         <br>

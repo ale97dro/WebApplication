@@ -32,6 +32,7 @@ public class BlogPostService
         return blogPostRepository.findAll();
     }
 
+    @ModelAttribute("post")
     public BlogPost getPost(int id)
     {
         Optional<BlogPost> optionalPost = blogPostRepository.findById(id);
