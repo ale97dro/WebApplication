@@ -6,15 +6,15 @@
         <meta name="description" content="See all blogpost">
         <meta name="author" content="Alessandro Bianchi">
         <title>Insert new blogpost</title>
-        <link rel="stylesheet" type="text/css" href="common.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="allBlogpost.css" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{../common.css}" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{../allBlogpost.css}" media="screen" />
     </head>
 
     <body class="background">
 
         <header class="header">
-            <a href="index.html">
-                <img src="logo.jpg" alt="logo">
+            <a th:href="@{/}">
+                <img th:src="@{logo.jpg}" alt="logo">
             </a>
         </header>
 

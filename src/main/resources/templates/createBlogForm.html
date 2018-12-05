@@ -34,9 +34,7 @@
                     <td class="field">Category</td>
                     <td>
                         <select>
-                            <option value="1">Sport</option>
-                            <option value="2">Cultura</option>
-                            <option value="3">Scienza</option>
+                            <option th:each="category : ${allCategory}" th:value="${category.getId()}" th:text="${category.getName()}">Categoriee</option>
                         </select>
                     </td>
                 </tr>

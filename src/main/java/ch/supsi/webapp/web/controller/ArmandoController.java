@@ -3,7 +3,9 @@ package ch.supsi.webapp.web.controller;
 import ch.supsi.webapp.web.BlogPostService;
 import ch.supsi.webapp.web.model.BlogPost;
 import ch.supsi.webapp.web.repository.BlogPostRepository;
+import ch.supsi.webapp.web.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,14 @@ public class ArmandoController {
     @Autowired
     private BlogPostRepository blogPostRepository;
 
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    /**
+     * Ottieni l'homepage del sito
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String getIndex(Model model)
     {
@@ -30,6 +40,12 @@ public class ArmandoController {
         return "index";
     }
 
+    /**
+     * Ottieni un blogpost partendo dal suo id
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/blog/{id}")
     public String getBlogPost(@PathVariable int id, Model model)
     {
@@ -37,6 +53,11 @@ public class ArmandoController {
         return "blogpostDetails";
     }
 
+    /**
+     * Ottieni tutti i blogpost e visualizzali sulla loro pagina dedicata
+     * @param model
+     * @return
+     */
     @GetMapping("/all")
     public String getAllBlogPost(Model model)
     {
@@ -44,9 +65,15 @@ public class ArmandoController {
         return "allBlogpost";
     }
 
+    /**
+     * Ritorna il form per l'inserimento dei blogpost
+     * @param model
+     * @return
+     */
     @GetMapping("/blog/new")
-    public String getCreateBlogpost()
+    public String getCreateBlogpost(Model model)
     {
+        model.addAttribute("allCategory", categoriaRepository.findAll());
         return "createBlogForm";
     }
 
