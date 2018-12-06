@@ -1,6 +1,7 @@
 package ch.supsi.webapp.web.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -24,7 +25,7 @@ public class BlogPost
     private String title;
     @Column(columnDefinition = "Text")
     private String text;
-    private Date date;
+    private LocalDateTime date;
 
     public BlogPost()
     {
@@ -109,12 +110,12 @@ public class BlogPost
         return category;
     }
 
-    public void setDate(Date date)
+    public void setDate(LocalDateTime date)
     {
         this.date = date;
     }
 
-    public Date getDate()
+    public LocalDateTime getDate()
     {
         return date;
     }

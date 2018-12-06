@@ -2,6 +2,7 @@ package ch.supsi.webapp.web.controller;
 
 import ch.supsi.webapp.web.BlogPostService;
 import ch.supsi.webapp.web.model.BlogPost;
+import ch.supsi.webapp.web.model.Utente;
 import ch.supsi.webapp.web.repository.BlogPostRepository;
 import ch.supsi.webapp.web.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -36,7 +40,8 @@ public class ArmandoController {
     @GetMapping("/")
     public String getIndex(Model model)
     {
-        model.addAttribute("allPosts", blogPostService.getAll());
+        //List<BlogPost> posts = blogPostService.getAll();
+        model.addAttribute("allPosts", blogPostService.recentBlogPost());
         return "index";
     }
 
@@ -73,8 +78,22 @@ public class ArmandoController {
     @GetMapping("/blog/new")
     public String getCreateBlogpost(Model model)
     {
+        model.addAttribute("newPost", new BlogPost());
         model.addAttribute("allCategory", categoriaRepository.findAll());
         return "createBlogForm";
+    }
+
+    @PostMapping("/blog/new")
+    public String addNewPost(@ModelAttribute BlogPost newPost, Model model)
+    {
+        Utente user = new Utente();
+        user.setId(24);
+        newPost.setAuthor(user);
+        newPost.setDate(LocalDateTime.now());
+        model.addAttribute("newPost", newPost); //todo ok
+        blogPostService.addNewBlogPost(newPost);
+
+        return "redirect:/";
     }
 
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +39,17 @@ public class BlogPostService
         Optional<BlogPost> optionalPost = blogPostRepository.findById(id);
 
         return optionalPost.orElse(null);
+    }
+
+    public List<BlogPost> recentBlogPost()
+    {
+        List<BlogPost> temp = blogPostRepository.recentBlogPostFirst();
+        List<BlogPost> recent = new ArrayList<>();
+
+        for(int i=0;i<temp.size() && i<3; i++)
+            recent.add(temp.get(i));
+
+        return recent;
     }
 
     public BlogPost addNewBlogPost(BlogPost post)

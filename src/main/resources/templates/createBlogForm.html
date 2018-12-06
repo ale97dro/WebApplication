@@ -19,7 +19,8 @@
 
         <br><br><br>
 
-        <form method="post">
+        <!-- Se tolgo action, la richiesta post verrà fatta sull'indirizzo a cui è stato chiamato e non devo duplicare il form per l'inserimento e la modifica-->
+        <form method="post" th:action="@{/blog/new}" th:object="${newPost}">
             <table class="table" border="2">
                 <tr>
                     <td class="title" colspan="2">Insert new blogpost</td>
@@ -27,13 +28,13 @@
                 <tr>
                     <td class="field">Title</td>
                     <td>
-                        <input type="text" name="title" />
+                        <input th:field="*{title}" type="text" name="title" />
                     </td>
                 </tr>
                 <tr>
                     <td class="field">Category</td>
                     <td>
-                        <select>
+                        <select th:field="*{category}">
                             <option th:each="category : ${allCategory}" th:value="${category.getId()}" th:text="${category.getName()}">Categoriee</option>
                         </select>
                     </td>
@@ -43,7 +44,7 @@
                         Text
                     </td>
                     <td>   
-                        <textarea name="message" rows="10" cols="30">
+                        <textarea th:field="*{text}" name="text" rows="10" cols="30">
                             Blogpost text
                         </textarea>
                     </td>
