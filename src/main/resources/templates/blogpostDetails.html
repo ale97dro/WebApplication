@@ -29,7 +29,9 @@
             <br>
         </section>
 
-
+        <a th:href="@{'/blog/' + ${post.getId()} + '/delete'}">
+            Delete
+        </a>
     </body>
 
 </html>

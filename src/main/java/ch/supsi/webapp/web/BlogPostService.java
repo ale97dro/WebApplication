@@ -26,14 +26,11 @@ public class BlogPostService
     @Autowired
     private UtenteRepository utenteRepository;
 
-    //TODO: taggare questi metodi come modelAttribute come fatto in Armando
-    @ModelAttribute("allPosts")
     public List<BlogPost> getAll()
     {
         return blogPostRepository.findAll();
     }
 
-    @ModelAttribute("post")
     public BlogPost getPost(int id)
     {
         Optional<BlogPost> optionalPost = blogPostRepository.findById(id);

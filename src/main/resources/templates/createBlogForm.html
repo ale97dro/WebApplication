@@ -20,7 +20,7 @@
         <br><br><br>
 
         <!-- Se tolgo action, la richiesta post verrà fatta sull'indirizzo a cui è stato chiamato e non devo duplicare il form per l'inserimento e la modifica-->
-        <form method="post" th:action="@{/blog/new}" th:object="${newPost}">
+        <form method="post" th:object="${newPost}">
             <table class="table" border="2">
                 <tr>
                     <td class="title" colspan="2">Insert new blogpost</td>

@@ -96,6 +96,13 @@ public class ArmandoController {
         return "redirect:/";
     }
 
+    @GetMapping("/blog/{id}/delete")
+    public String removePost(@PathVariable int id, Model model)
+    {
+        blogPostService.deleteBlogPost(id);
+        return "redirect:/";
+    }
+
 
 //    @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.GET)
 //    public ResponseEntity<BlogPost> getPost(@PathVariable int id)
