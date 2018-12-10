@@ -6,15 +6,15 @@
         <meta name="description" content="See all blogpost">
         <meta name="author" content="Alessandro Bianchi">
         <title>Insert new blogpost</title>
-        <link rel="stylesheet" type="text/css" th:href="@{../common.css}" media="screen" />
-        <link rel="stylesheet" type="text/css" th:href="@{../blogpostDetails.css}" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/blogpostDetails.css'}" media="screen" />
     </head>
 
     <body class="background">
 
         <header class="header">
             <a th:href="@{/}">
-                <img th:src="@{../logo.jpg}" alt="logo">
+                <img th:src="@{'/icon/logo.jpg'}" alt="logo">
             </a>
         </header>
 
@@ -28,6 +28,10 @@
             </article>
             <br>
         </section>
+
+        <a th:href="@{'/blog/' + ${post.getId()} + '/edit'}" th:text="${'Edit      '}">
+            Edit
+        </a>
 
         <a th:href="@{'/blog/' + ${post.getId()} + '/delete'}">
             Delete

@@ -6,14 +6,14 @@
         <meta name="description" content="Index of blogpost">
         <meta name="author" content="Alessandro Bianchi">
         <title>Home</title>
-        <link rel="stylesheet" type="text/css" href="common.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/index.css'}" media="screen" />
     </head>
 
     <body class="background">
         <header class="header">
             <a th:href="@{/}">
-                    <img src="logo.jpg" alt="logo">
+                    <img th:src="@{'/icon/logo.jpg'}" alt="logo">
                 </a>
         </header>
 

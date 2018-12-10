@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.WebParam;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,15 +81,14 @@ public class ArmandoController {
     {
         model.addAttribute("newPost", new BlogPost());
         model.addAttribute("allCategory", categoriaRepository.findAll());
+        model.addAttribute("operation", "Create blogpost");
         return "createBlogForm";
     }
 
     @PostMapping("/blog/new")
     public String addNewPost(@ModelAttribute BlogPost newPost, Model model)
     {
-        Utente user = new Utente();
-        user.setId(24);
-        newPost.setAuthor(user);
+        setAuthor(newPost);
         newPost.setDate(LocalDateTime.now());
         model.addAttribute("newPost", newPost); //todo ok
         blogPostService.addNewBlogPost(newPost);
@@ -103,7 +103,35 @@ public class ArmandoController {
         return "redirect:/";
     }
 
+    @GetMapping("/blog/{id}/edit")
+    public String getUpdateBlogPost(@PathVariable int id, Model model)
+    {
+        BlogPost post = blogPostService.getPost(id);
+        model.addAttribute("newPost", post);
+        model.addAttribute("allCategory", categoriaRepository.findAll());
+        model.addAttribute("operation", "Edit blogpost");
 
+        return "createBlogForm";
+        //questo lo pianto nel model e poi lo visualizzo
+    }
+
+    @PostMapping("/blog/{id}/edit")
+    public String updateBlogPost(@ModelAttribute BlogPost updatedPost, Model model)
+    {
+        setAuthor(updatedPost);
+        blogPostService.updateBlogPost(updatedPost, updatedPost.getId());
+
+
+        return "redirect:/";
+    }
+
+    //TODO: fare in modo che l'utente possa scegliere l'autore
+    private void setAuthor(BlogPost post)
+    {
+        Utente user = new Utente();
+        user.setId(24);
+        post.setAuthor(user);
+    }
 //    @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.GET)
 //    public ResponseEntity<BlogPost> getPost(@PathVariable int id)
 //    {

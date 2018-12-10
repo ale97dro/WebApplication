@@ -5,15 +5,15 @@
             <meta name="description" content="Insert blogpost">
             <meta name="author" content="Alessandro Bianchi">
         <title>Insert new blogpost</title>
-        <link rel="stylesheet" type="text/css" th:href="@{../createBlogForm.css}" media="screen" />
-        <link rel="stylesheet" type="text/css" th:href="@{../common.css}" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/createBlogForm.css'}" media="screen" />
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
     </head>
 
     <body class="background">
 
         <header class="header">
             <a th:href="@{/}">
-                <img th:src="@{../logo.jpg}" alt="logo">
+                <img th:src="@{'/icon/logo.jpg'}" alt="logo">
             </a>
         </header>
 
@@ -23,7 +23,7 @@
         <form method="post" th:object="${newPost}">
             <table class="table" border="2">
                 <tr>
-                    <td class="title" colspan="2">Insert new blogpost</td>
+                    <td class="title" colspan="2" th:text="${operation}">Insert new blogpost</td>
                 </tr>
                 <tr>
                     <td class="field">Title</td>
@@ -44,7 +44,7 @@
                         Text
                     </td>
                     <td>   
-                        <textarea th:field="*{text}" name="text" rows="10" cols="30">
+                        <textarea th:field="*{text}" th:text="${newPost.text}" name="text" rows="10" cols="30">
                             Blogpost text
                         </textarea>
                     </td>
