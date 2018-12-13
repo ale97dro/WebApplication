@@ -7,15 +7,9 @@ import javax.persistence.*;
 public class Utente
 {
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
     private String name;
 
-    //@ManyToOne(cascade = {CascadeType.MERGE})
-    //@OneToMany(cascade = { CascadeType.ALL }, mappedBy="UTENTE")
-    @ManyToOne
-    @JoinColumn(name="fk_role")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Ruolo role;
 
     public Utente()
@@ -23,29 +17,17 @@ public class Utente
 
     }
 
-    public Utente(int id)
-    {
-        this.id = id;
-    }
-
     public Utente(int id, String name, Ruolo role)
     {
-        this.id = id;
+       // this.id = id;
         this.name = name;
         this.role = role;
     }
-//    public Utente(String name)
-//    {
-//        this.name = name;
-//    }
-//
-//    public Utente(String name, Ruolo role)
-//    {
-//        this.name = name;
-//        this.role = role;
-//    }
 
-
+    public Utente(String name, Ruolo role) {
+        this.role = role;
+        this.name = name;
+    }
 
     public void setName(String name)
     {
@@ -65,16 +47,6 @@ public class Utente
     public Ruolo getRole()
     {
         return role;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    public int getId()
-    {
-        return id;
     }
 
     public String toString()

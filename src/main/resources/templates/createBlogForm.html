@@ -32,10 +32,18 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="field">Author</td>
+                    <td>
+                        <select th:field="*{author}">
+                            <option th:each="author : ${allAuthor}" th:value="${author.getName()}" th:text="${author.getName()}">Author</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td class="field">Category</td>
                     <td>
                         <select th:field="*{category}">
-                            <option th:each="category : ${allCategory}" th:value="${category.getId()}" th:text="${category.getName()}">Categoriee</option>
+                            <option th:each="_category : ${allCategory}" th:value="${_category.getName()}" th:text="${_category.getName()}">Categoriee</option>
                         </select>
                     </td>
                 </tr>

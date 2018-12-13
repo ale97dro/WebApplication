@@ -7,10 +7,6 @@ import javax.persistence.*;
 public class Categoria
 {
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
-
     private String name;
 
     public Categoria()
@@ -18,22 +14,10 @@ public class Categoria
 
     }
 
-    public Categoria(int id)
+    public Categoria(String name)
     {
-        this.id = id;
+        this.name = name;
     }
-
-//    public Categoria(String id, String name)
-//    {
-//        this.id = Integer.parseInt(id);
-//        this.name = name;
-//    }
-//
-//    public Categoria(int id, String name)
-//    {
-//        this.id = id;
-//        this.name = name;
-//    }
 
     public void setName(String name)
     {
@@ -45,13 +29,4 @@ public class Categoria
         return name;
     }
 
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    public int getId()
-    {
-        return id;
-    }
 }

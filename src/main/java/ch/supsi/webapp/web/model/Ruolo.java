@@ -7,10 +7,6 @@ import javax.persistence.*;
 public class Ruolo {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
-
     private String name;
 
     public Ruolo()
@@ -32,16 +28,4 @@ public class Ruolo {
     {
         return name;
     }
-
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-
 }

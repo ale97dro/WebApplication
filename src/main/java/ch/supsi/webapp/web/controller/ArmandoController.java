@@ -5,6 +5,7 @@ import ch.supsi.webapp.web.model.BlogPost;
 import ch.supsi.webapp.web.model.Utente;
 import ch.supsi.webapp.web.repository.BlogPostRepository;
 import ch.supsi.webapp.web.repository.CategoriaRepository;
+import ch.supsi.webapp.web.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.jws.WebParam;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,6 +32,8 @@ public class ArmandoController {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private UtenteRepository utenteRepository;
 
     /**
      * Ottieni l'homepage del sito
@@ -81,6 +83,7 @@ public class ArmandoController {
     {
         model.addAttribute("newPost", new BlogPost());
         model.addAttribute("allCategory", categoriaRepository.findAll());
+        model.addAttribute("allAuthor", utenteRepository.findAll());
         model.addAttribute("operation", "Create blogpost");
         return "createBlogForm";
     }
@@ -88,7 +91,7 @@ public class ArmandoController {
     @PostMapping("/blog/new")
     public String addNewPost(@ModelAttribute BlogPost newPost, Model model)
     {
-        setAuthor(newPost);
+        //setAuthor(newPost);
         newPost.setDate(LocalDateTime.now());
         model.addAttribute("newPost", newPost); //todo ok
         blogPostService.addNewBlogPost(newPost);
@@ -109,6 +112,7 @@ public class ArmandoController {
         BlogPost post = blogPostService.getPost(id);
         model.addAttribute("newPost", post);
         model.addAttribute("allCategory", categoriaRepository.findAll());
+        model.addAttribute("allAuthor", utenteRepository.findAll());
         model.addAttribute("operation", "Edit blogpost");
 
         return "createBlogForm";
@@ -118,20 +122,19 @@ public class ArmandoController {
     @PostMapping("/blog/{id}/edit")
     public String updateBlogPost(@ModelAttribute BlogPost updatedPost, Model model)
     {
-        setAuthor(updatedPost);
+        //setAuthor(updatedPost);
         blogPostService.updateBlogPost(updatedPost, updatedPost.getId());
 
 
         return "redirect:/";
     }
 
-    //TODO: fare in modo che l'utente possa scegliere l'autore
-    private void setAuthor(BlogPost post)
-    {
-        Utente user = new Utente();
-        user.setId(24);
-        post.setAuthor(user);
-    }
+//    private void setAuthor(BlogPost post)
+//    {
+//        Utente user = new Utente();
+//        user.setId(24);
+//        post.setAuthor(user);
+//    }
 //    @RequestMapping(value = "/blogposts/{id}", method = RequestMethod.GET)
 //    public ResponseEntity<BlogPost> getPost(@PathVariable int id)
 //    {
