@@ -7,10 +7,11 @@
         <title>Insert new blogpost</title>
         <link rel="stylesheet" type="text/css" th:href="@{'/css/createBlogForm.css'}" media="screen" />
         <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
+        <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" rel="stylesheet">
     </head>
 
     <body class="background">
-
+    <div class="container">
         <header class="header">
             <a th:href="@{/}">
                 <img th:src="@{'/icon/logo.jpg'}" alt="logo">
@@ -28,13 +29,13 @@
                 <tr>
                     <td class="field">Title</td>
                     <td>
-                        <input th:field="*{title}" type="text" name="title" />
+                        <input class="form-control" th:field="*{title}" type="text" name="title" />
                     </td>
                 </tr>
                 <tr>
                     <td class="field">Author</td>
                     <td>
-                        <select th:field="*{author}">
+                        <select class="form-control" th:field="*{author}">
                             <option th:each="author : ${allAuthor}" th:value="${author.getName()}" th:text="${author.getName()}">Author</option>
                         </select>
                     </td>
@@ -42,7 +43,7 @@
                 <tr>
                     <td class="field">Category</td>
                     <td>
-                        <select th:field="*{category}">
+                        <select class="form-control" th:field="*{category}">
                             <option th:each="_category : ${allCategory}" th:value="${_category.getName()}" th:text="${_category.getName()}">Categoriee</option>
                         </select>
                     </td>
@@ -52,18 +53,19 @@
                         Text
                     </td>
                     <td>   
-                        <textarea th:field="*{text}" th:text="${newPost.text}" name="text" rows="10" cols="30">
+                        <textarea class="form-control" th:field="*{text}" th:text="${newPost.text}" name="text" rows="10" cols="30">
                             Blogpost text
                         </textarea>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="submit" value="Insert" />
+                        <input class="btn btn-primary" type="submit" value="Insert" />
                     </td>
                 </tr>
             </table>
         </form>
+    </div>
     </body>
 
 </html>

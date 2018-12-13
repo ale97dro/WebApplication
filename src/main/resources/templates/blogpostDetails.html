@@ -8,10 +8,12 @@
         <title>Insert new blogpost</title>
         <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
         <link rel="stylesheet" type="text/css" th:href="@{'/css/blogpostDetails.css'}" media="screen" />
+        <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" rel="stylesheet">
     </head>
 
     <body class="background">
 
+    <div class="container">
         <header class="header">
             <a th:href="@{/}">
                 <img th:src="@{'/icon/logo.jpg'}" alt="logo">
@@ -24,7 +26,7 @@
                 <p th:text="'Author: ' + ${post.getAuthor()}">autore</p><br>
                 <p>Date: <time th:datetime="${post.getDate()}" th:text="${post.getDate()}"></time></p><br>
                 <p th:text="'Category: ' + ${post.getCategory().getName()}">categoria</p><br>
-                <p th:text="'Text: ' + ${post.getText()}">Testo</p><br>
+                <p th:text="${post.getText()}">Testo</p><br>
             </article>
             <br>
         </section>
@@ -36,6 +38,7 @@
         <a th:href="@{'/blog/' + ${post.getId()} + '/delete'}">
             Delete
         </a>
+    </div>
     </body>
 
 </html>

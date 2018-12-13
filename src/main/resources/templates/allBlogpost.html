@@ -8,10 +8,12 @@
         <title>Insert new blogpost</title>
         <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
         <link rel="stylesheet" type="text/css" th:href="@{'/css/allBlogpost.css'}" media="screen" />
+        <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" rel="stylesheet">
     </head>
 
     <body class="background">
 
+    <div class="container">
         <header class="header">
             <a th:href="@{/}">
                 <img th:src="@{'/icon/logo.jpg'}" alt="logo">
@@ -25,6 +27,6 @@
                 </article>
             </a>
         </section>
-
+    </div>
     </body>
 </html>
