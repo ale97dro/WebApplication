@@ -12,23 +12,28 @@
     </head>
 
     <body class="background">
+
+    <div class="container">
+
         <header class="header">
             <a th:href="@{/}">
                     <img th:src="@{'/icon/logo.jpg'}" alt="logo">
                 </a>
         </header>
 
-        <nav>
-            <ul class="nav">
-                <li class="navVoice" >
-                    <a class="navFont" th:href="@{'/blog/new'}">Insert new blogpost</a>
-                </li>
-                <li class="navVoice">
-                    <a class="navFont" th:href="@{'/all'}">See all blogpost</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="nav">-->
+                <!--<li class="navVoice" >-->
+                    <!--<a class="navFont" th:href="@{'/blog/new'}">Insert new blogpost</a>-->
+                <!--</li>-->
+                <!--<li class="navVoice">-->
+                    <!--<a class="navFont" th:href="@{'/all'}">See all blogpost</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <br>
+        <div th:replace="~{master :: navBar}"></div>
+
+        <br><br>
 
         <section class="section" th:each="post : ${allPosts}">
             <!--<article class="article">
@@ -58,10 +63,13 @@
 
         <br>
 
-        <footer class="footer">
-            <small>Copyleft CC-by 2018 by Alessandro Bianchi</small>
-        </footer>
+        <!--<footer class="footer">-->
+            <!--<small>Copyleft CC-by 2018 by Alessandro Bianchi</small>-->
+        <!--</footer>-->
 
+        <div th:replace="~{master :: footer}"></div>
+
+        </div>
     </body>
 
 </html>

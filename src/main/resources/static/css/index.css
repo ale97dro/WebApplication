@@ -1,6 +1,7 @@
 .footer 
 {
-    position: fixed;
+    /*position: fixed;*/
+    position: relative;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -51,12 +52,12 @@
 
 .article
 {
-    font-size: 12px;
+    font-size: 20px;
     padding: 14px 16px;
     text-align: center;
 }
 
 .section
 {
-    width: 90%;
+    width: 100%;
 }

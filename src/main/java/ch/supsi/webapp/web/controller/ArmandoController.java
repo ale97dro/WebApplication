@@ -85,6 +85,7 @@ public class ArmandoController {
         model.addAttribute("allCategory", categoriaRepository.findAll());
         model.addAttribute("allAuthor", utenteRepository.findAll());
         model.addAttribute("operation", "Create blogpost");
+        model.addAttribute("submitVal", "Create");
         return "createBlogForm";
     }
 
@@ -114,6 +115,7 @@ public class ArmandoController {
         model.addAttribute("allCategory", categoriaRepository.findAll());
         model.addAttribute("allAuthor", utenteRepository.findAll());
         model.addAttribute("operation", "Edit blogpost");
+        model.addAttribute("submitVal", "Edit");
 
         return "createBlogForm";
         //questo lo pianto nel model e poi lo visualizzo

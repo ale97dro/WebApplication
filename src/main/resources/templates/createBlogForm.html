@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" th:href="@{'/css/createBlogForm.css'}" media="screen" />
         <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
         <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/index.css'}" media="screen" />
     </head>
 
     <body class="background">
@@ -18,6 +19,7 @@
             </a>
         </header>
 
+        <div th:replace="~{master :: navBar}"></div>
         <br><br><br>
 
         <!-- Se tolgo action, la richiesta post verrà fatta sull'indirizzo a cui è stato chiamato e non devo duplicare il form per l'inserimento e la modifica-->
@@ -60,11 +62,12 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input class="btn btn-primary" type="submit" value="Insert" />
+                        <input class="btn btn-primary" type="submit" th:value="${submitVal}" />
                     </td>
                 </tr>
             </table>
         </form>
+        <div th:replace="~{master :: footer}"></div>
     </div>
     </body>
 

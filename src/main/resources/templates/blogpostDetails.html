@@ -3,42 +3,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <meta name="description" content="See all blogpost">
+        <meta name="description" content="See blogpost details">
         <meta name="author" content="Alessandro Bianchi">
-        <title>Insert new blogpost</title>
+        <title>Blogpost details</title>
         <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
         <link rel="stylesheet" type="text/css" th:href="@{'/css/blogpostDetails.css'}" media="screen" />
         <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" th:href="@{'/css/index.css'}" media="screen" />
     </head>
 
     <body class="background">
 
-    <div class="container">
-        <header class="header">
-            <a th:href="@{/}">
-                <img th:src="@{'/icon/logo.jpg'}" alt="logo">
+        <div class="container">
+            <header class="header">
+                <a th:href="@{/}">
+                    <img th:src="@{'/icon/logo.jpg'}" alt="logo">
+                </a>
+            </header>
+
+            <div th:replace="~{master :: navBar}"></div>
+            <br><br>
+            <section>
+                <article class="details_article">
+                    <p th:text="${post.getTitle()}"> titolo</p><br>
+                    <p th:text="'Author: ' + ${post.getAuthor()}">autore</p><br>
+                    <p>Date: <time th:datetime="${post.getDate()}" th:text="${post.getDate()}"></time></p><br>
+                    <p th:text="'Category: ' + ${post.getCategory().getName()}">categoria</p><br>
+                    <p th:text="${post.getText()}">Testo</p><br>
+                </article>
+                <br>
+            </section>
+
+            <a th:href="@{'/blog/' + ${post.getId()} + '/edit'}" th:text="${'Edit      '}">
+                Edit
             </a>
-        </header>
 
-        <section>
-            <article class="article">
-                <p th:text="${post.getTitle()}"> titolo</p><br>
-                <p th:text="'Author: ' + ${post.getAuthor()}">autore</p><br>
-                <p>Date: <time th:datetime="${post.getDate()}" th:text="${post.getDate()}"></time></p><br>
-                <p th:text="'Category: ' + ${post.getCategory().getName()}">categoria</p><br>
-                <p th:text="${post.getText()}">Testo</p><br>
-            </article>
-            <br>
-        </section>
-
-        <a th:href="@{'/blog/' + ${post.getId()} + '/edit'}" th:text="${'Edit      '}">
-            Edit
-        </a>
-
-        <a th:href="@{'/blog/' + ${post.getId()} + '/delete'}">
-            Delete
-        </a>
-    </div>
+            <a th:href="@{'/blog/' + ${post.getId()} + '/delete'}">
+                Delete
+            </a>
+            <div th:replace="~{master :: footer}"></div>
+        </div>
     </body>
 
 </html>
