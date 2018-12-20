@@ -9,6 +9,8 @@ import ch.supsi.webapp.web.repository.CategoriaRepository;
 import ch.supsi.webapp.web.repository.RuoloRepository;
 import ch.supsi.webapp.web.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -30,11 +32,17 @@ public class BlogPostService
     @Autowired
     private UtenteRepository utenteRepository;
 
+    private PasswordEncoder encoder;
+
 
     @PostConstruct
     public void init() {
+
+        encoder = new BCryptPasswordEncoder();
+
         if(utenteRepository.findAll().size() == 0) {
             Utente admin = new Utente("admin", new Ruolo("ROLE_ADMIN"));
+            admin.setPassword(encoder.encode("1234")); //salva la password criptata
             utenteRepository.save(admin);
             ruoloRepository.save(new Ruolo("ROLE_USER"));
         }
@@ -144,5 +152,13 @@ public class BlogPostService
     public boolean isValidBlogPost(BlogPost post)
     {
         return ((post.getAuthor() != null) && (post.getTitle() != null) && (post.getText() != null));
+    }
+
+    public Utente findUserByUsername(String username)
+    {
+        Optional<Utente> optionalUser = utenteRepository.findById(username);
+
+        return optionalUser.orElse(null);
+
     }
 }

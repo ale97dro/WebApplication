@@ -11,6 +11,7 @@ public class Utente
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Ruolo role;
+    private String password;
 
     public Utente()
     {
@@ -47,6 +48,16 @@ public class Utente
     public Ruolo getRole()
     {
         return role;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public String getPassword()
+    {
+        return password;
     }
 
     public String toString()
