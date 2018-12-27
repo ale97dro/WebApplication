@@ -38,7 +38,6 @@ public class ArmandoController {
     @GetMapping("/")
     public String getIndex(Model model)
     {
-        //List<BlogPost> posts = blogPostService.getAll();
         model.addAttribute("allPosts", blogPostService.recentBlogPost());
         return "index";
     }

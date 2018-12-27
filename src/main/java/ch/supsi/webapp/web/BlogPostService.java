@@ -164,6 +164,8 @@ public class BlogPostService
     public void addUser(Utente utente)
     {
         utente.setPassword(encoder.encode(utente.getPassword()));
-        utenteRepository.save(utente);
+
+        if(!utenteRepository.findById(utente.getName()).isPresent())
+            utenteRepository.save(utente);
     }
 }
