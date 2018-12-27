@@ -2,6 +2,7 @@ package ch.supsi.webapp.web.controller;
 
 import ch.supsi.webapp.web.BlogPostService;
 import ch.supsi.webapp.web.model.BlogPost;
+import ch.supsi.webapp.web.model.Ruolo;
 import ch.supsi.webapp.web.model.Utente;
 import ch.supsi.webapp.web.repository.BlogPostRepository;
 import ch.supsi.webapp.web.repository.CategoriaRepository;
@@ -133,5 +134,20 @@ public class ArmandoController {
     public String login(Model model)
     {
         return "login";
+    }
+
+    @GetMapping("/register")
+    public String getRegister(Model model)
+    {
+        model.addAttribute("user", new Utente());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String postRegister(@ModelAttribute Utente utente)
+    {
+        utente.setRole(new Ruolo("ROLE_USER"));
+        blogPostService.addUser(utente);
+        return "redirect:/";
     }
 }

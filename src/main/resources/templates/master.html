@@ -25,13 +25,16 @@
             <a class="navFont" th:href="@{'/all'}">See all blogpost</a>
         </li>
         <li class="navVoice" sec:authorize="isAnonymous()">
-            <a class="navFont"  href="/login">Login</a>
+            <a class="navFont" href="/login">Login</a>
+        </li>
+        <li class="navVoice" sec:authorize="isAnonymous()">
+            <a class="navFont" href="/register">Register</a>
         </li>
         <li class="navVoice" sec:authorize="isAuthenticated()">
             <a class="navFont" href="/logout">Logout</a>
         </li>
         <li class="navVoice" sec:authorize="isAuthenticated()">
-            <p class="navFont" th:text="${#authentication.name}">name</p>
+            <p class="navFont" sec:authentication="name">name</p>
         </li>
     </ul>
 </nav>

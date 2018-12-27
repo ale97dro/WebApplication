@@ -160,4 +160,10 @@ public class BlogPostService
 
         return optionalUser.orElse(null);
     }
+
+    public void addUser(Utente utente)
+    {
+        utente.setPassword(encoder.encode(utente.getPassword()));
+        utenteRepository.save(utente);
+    }
 }
