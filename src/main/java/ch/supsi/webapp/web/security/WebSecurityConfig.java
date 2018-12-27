@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/blog/*/delete").authenticated()
                 .antMatchers("/blog/**").permitAll()
                 .antMatchers("/css/**").permitAll()
+                .antMatchers("/icon/**").permitAll()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/fonts/**").permitAll()
                 .antMatchers("/login", "/register").permitAll()

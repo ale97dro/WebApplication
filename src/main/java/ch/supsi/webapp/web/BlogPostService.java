@@ -159,6 +159,5 @@ public class BlogPostService
         Optional<Utente> optionalUser = utenteRepository.findById(username);
 
         return optionalUser.orElse(null);
-
     }
 }

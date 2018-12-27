@@ -21,32 +21,11 @@
                 </a>
         </header>
 
-        <!--<nav>-->
-            <!--<ul class="nav">-->
-                <!--<li class="navVoice" >-->
-                    <!--<a class="navFont" th:href="@{'/blog/new'}">Insert new blogpost</a>-->
-                <!--</li>-->
-                <!--<li class="navVoice">-->
-                    <!--<a class="navFont" th:href="@{'/all'}">See all blogpost</a></li>-->
-            <!--</ul>-->
-        <!--</nav>-->
-
         <div th:replace="~{master :: navBar}"></div>
 
         <br><br>
 
         <section class="section" th:each="post : ${allPosts}">
-            <!--<article class="article">
-                Blogpost 1 ...
-            </article>
-
-            <article class="article">
-                Blogpost 2 ...
-            </article>
-
-            <article class="article">
-                Blogpost 3 ...
-            </article>-->
 
             <a th:href="@{'/blog/' + ${post.getId()}}">
                 <article class="article" th:text="${post.getTitle()}">
@@ -63,9 +42,6 @@
 
         <br>
 
-        <!--<footer class="footer">-->
-            <!--<small>Copyleft CC-by 2018 by Alessandro Bianchi</small>-->
-        <!--</footer>-->
 
         <div th:replace="~{master :: footer}"></div>
 

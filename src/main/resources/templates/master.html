@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th=http://www.thymeleaf.org> >
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -22,7 +22,17 @@
             <a class="navFont" th:href="@{'/blog/new'}">Insert new blogpost</a>
         </li>
         <li class="navVoice">
-            <a class="navFont" th:href="@{'/all'}">See all blogpost</a></li>
+            <a class="navFont" th:href="@{'/all'}">See all blogpost</a>
+        </li>
+        <li class="navVoice" sec:authorize="isAnonymous()">
+            <a class="navFont"  href="/login">Login</a>
+        </li>
+        <li class="navVoice" sec:authorize="isAuthenticated()">
+            <a class="navFont" href="/logout">Logout</a>
+        </li>
+        <li class="navVoice" sec:authorize="isAuthenticated()">
+            <p class="navFont" th:text="${#authentication.name}">name</p>
+        </li>
     </ul>
 </nav>
 

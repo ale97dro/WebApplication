@@ -7,6 +7,8 @@ import ch.supsi.webapp.web.repository.BlogPostRepository;
 import ch.supsi.webapp.web.repository.CategoriaRepository;
 import ch.supsi.webapp.web.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,6 @@ public class ArmandoController {
     private BlogPostService blogPostService;
     @Autowired
     private BlogPostRepository blogPostRepository;
-
     @Autowired
     private CategoriaRepository categoriaRepository;
     @Autowired
@@ -76,7 +77,7 @@ public class ArmandoController {
     {
         model.addAttribute("newPost", new BlogPost());
         model.addAttribute("allCategory", categoriaRepository.findAll());
-        model.addAttribute("allAuthor", utenteRepository.findAll());
+        //model.addAttribute("allAuthor", utenteRepository.findAll());
         model.addAttribute("operation", "Create blogpost");
         model.addAttribute("submitVal", "Create");
         return "createBlogForm";
@@ -85,7 +86,8 @@ public class ArmandoController {
     @PostMapping("/blog/new")
     public String addNewPost(@ModelAttribute BlogPost newPost, Model model)
     {
-        //setAuthor(newPost);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        newPost.setAuthor(blogPostService.findUserByUsername(user.getUsername()));
         newPost.setDate(LocalDateTime.now());
         model.addAttribute("newPost", newPost); //todo ok
         blogPostService.addNewBlogPost(newPost);
@@ -96,7 +98,12 @@ public class ArmandoController {
     @GetMapping("/blog/{id}/delete")
     public String removePost(@PathVariable int id, Model model)
     {
-        blogPostService.deleteBlogPost(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Utente utente = blogPostService.findUserByUsername(user.getUsername());
+
+        if(utente.getRole().getName().equals("ROLE_ADMIN"))
+            blogPostService.deleteBlogPost(id);
+
         return "redirect:/";
     }
 
@@ -106,7 +113,7 @@ public class ArmandoController {
         BlogPost post = blogPostService.getPost(id);
         model.addAttribute("newPost", post);
         model.addAttribute("allCategory", categoriaRepository.findAll());
-        model.addAttribute("allAuthor", utenteRepository.findAll());
+        //model.addAttribute("allAuthor", utenteRepository.findAll());
         model.addAttribute("operation", "Edit blogpost");
         model.addAttribute("submitVal", "Edit");
 
@@ -117,7 +124,6 @@ public class ArmandoController {
     @PostMapping("/blog/{id}/edit")
     public String updateBlogPost(@ModelAttribute BlogPost updatedPost, Model model)
     {
-        //setAuthor(updatedPost);
         blogPostService.updateBlogPost(updatedPost, updatedPost.getId());
 
         return "redirect:/";
@@ -126,7 +132,6 @@ public class ArmandoController {
     @GetMapping("/login")
     public String login(Model model)
     {
-        model.addAttribute("user", new Utente());
         return "login";
     }
 }

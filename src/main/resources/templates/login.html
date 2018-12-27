@@ -25,7 +25,7 @@
 
     <br><br>
 
-    <form method="post" th:object="${user}">
+    <form method="post" th:action="@{'/login'}">
         <table class="table" border="2">
             <tr>
                 <td class="title" colspan="2">Login</td>
@@ -33,14 +33,20 @@
             <tr>
                 <td class="field">User</td>
                 <td>
-                    <input class="form-control" th:field="*{name}" type="text" name="name" />
+                    <input class="form-control" type="text" id="username" th:name="${'username'}" />
                 </td>
             </tr>
 
             <tr>
                 <td class="field">Password</td>
                 <td>
-                    <input class="form-control" th:field="*{password}" type="password" name="password" />
+                    <input class="form-control" type="password" id="password" th:name="${'password'}" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="Login" />
                 </td>
             </tr>
         </table>
