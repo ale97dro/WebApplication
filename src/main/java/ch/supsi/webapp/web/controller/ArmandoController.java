@@ -112,6 +112,7 @@ public class ArmandoController {
     {
         BlogPost post = blogPostService.getPost(id);
         model.addAttribute("newPost", post);
+        model.addAttribute("author", post.getAuthor().getName());
         model.addAttribute("allCategory", categoriaRepository.findAll());
         //model.addAttribute("allAuthor", utenteRepository.findAll());
         model.addAttribute("operation", "Edit blogpost");
@@ -122,9 +123,12 @@ public class ArmandoController {
     }
 
     @PostMapping("/blog/{id}/edit")
-    public String updateBlogPost(@ModelAttribute BlogPost updatedPost, Model model)
+    public String updateBlogPost(@ModelAttribute("author") String author, @ModelAttribute BlogPost updatedPost, Model model)
     {
+        updatedPost.setAuthor(blogPostService.findUserByUsername(author));
         blogPostService.updateBlogPost(updatedPost, updatedPost.getId());
+
+
 
         return "redirect:/";
     }

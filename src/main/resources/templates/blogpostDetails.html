@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="description" content="See blogpost details">
@@ -34,11 +34,11 @@
                 <br>
             </section>
 
-            <a th:href="@{'/blog/' + ${post.getId()} + '/edit'}" th:text="${'Edit      '}">
+            <a sec:authorize="isAuthenticated()" th:href="@{'/blog/' + ${post.getId()} + '/edit'}" th:text="${'Edit      '}">
                 Edit
             </a>
 
-            <a th:href="@{'/blog/' + ${post.getId()} + '/delete'}">
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{'/blog/' + ${post.getId()} + '/delete'}">
                 Delete
             </a>
             <div th:replace="~{master :: footer}"></div>
