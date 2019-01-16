@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Add comment">
+    <meta name="author" content="Alessandro Bianchi">
+    <title>Add comment</title>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/index.css'}" media="screen" />
+    <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body class="background">
+
+<div class="container">
+
+    <header class="header">
+        <a th:href="@{/}">
+            <img th:src="@{'/icon/logo.jpg'}" alt="logo">
+        </a>
+    </header>
+
+    <div th:replace="~{master :: navBar}"></div>
+
+    <br><br>
+
+    <form method="post" th:object="${comment}">
+        <table class="table" border="2">
+            <tr>
+                <td class="title" colspan="2">Insert new comment</td>
+            </tr>
+            <tr>
+                <td class="field">Title</td>
+                <td th:text="${postTitle}">
+                <!--    <input class="form-control" th:field="*{title}" type="text" name="title" />-->
+                </td>
+            </tr>
+
+            <tr>
+                <td class="field">
+                    Text
+                </td>
+                <td>
+                    <textarea th:field="*{text}" class="form-control" name="text" rows="10" cols="30">
+                        Blogpost text
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input class="btn btn-primary" type="submit" value="Post" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <br>
+
+
+    <div th:replace="~{master :: footer}"></div>
+
+</div>
+</body>
+
+</html>

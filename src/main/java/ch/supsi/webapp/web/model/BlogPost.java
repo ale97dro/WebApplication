@@ -3,6 +3,7 @@ package ch.supsi.webapp.web.model;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "BLOGPOST")
@@ -26,8 +27,10 @@ public class BlogPost
     @Column(columnDefinition = "Text")
     private String text;
     private LocalDateTime date;
-
     private boolean deleted;
+
+//    @OneToMany
+//    private List<Comment> comments;
 
     public BlogPost()
     {

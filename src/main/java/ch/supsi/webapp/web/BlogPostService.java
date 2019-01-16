@@ -1,13 +1,7 @@
 package ch.supsi.webapp.web;
 
-import ch.supsi.webapp.web.model.BlogPost;
-import ch.supsi.webapp.web.model.Categoria;
-import ch.supsi.webapp.web.model.Ruolo;
-import ch.supsi.webapp.web.model.Utente;
-import ch.supsi.webapp.web.repository.BlogPostRepository;
-import ch.supsi.webapp.web.repository.CategoriaRepository;
-import ch.supsi.webapp.web.repository.RuoloRepository;
-import ch.supsi.webapp.web.repository.UtenteRepository;
+import ch.supsi.webapp.web.model.*;
+import ch.supsi.webapp.web.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,6 +25,8 @@ public class BlogPostService
     private RuoloRepository ruoloRepository;
     @Autowired
     private UtenteRepository utenteRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     private PasswordEncoder encoder;
 
@@ -198,5 +194,28 @@ public class BlogPostService
         List<BlogPost> posts = blogPostRepository.deletedBlogPost();
 
         return posts;
+    }
+
+
+    public void addComment(Comment comment)
+    {
+        commentRepository.save(comment);
+    }
+
+    public List<Comment> getComments(int id)
+    {
+        List<Comment> comments = commentRepository.recentCommentsFirst();
+        List<Comment> returns = new ArrayList<>();
+
+        for(Comment c : comments)
+            if(c.getPost().getId() == id)
+                returns.add(c);
+
+        return returns;
+    }
+
+    public BlogPost getBlogpost(int id)
+    {
+        return blogPostRepository.findById(id).orElse(null);
     }
 }

@@ -2,6 +2,7 @@ package ch.supsi.webapp.web.controller;
 
 import ch.supsi.webapp.web.BlogPostService;
 import ch.supsi.webapp.web.model.BlogPost;
+import ch.supsi.webapp.web.model.Comment;
 import ch.supsi.webapp.web.model.Ruolo;
 import ch.supsi.webapp.web.model.Utente;
 import ch.supsi.webapp.web.repository.BlogPostRepository;
@@ -13,6 +14,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +54,7 @@ public class ArmandoController {
     @GetMapping("/blog/{id}")
     public String getBlogPost(@PathVariable int id, Model model)
     {
+        model.addAttribute("comments", blogPostService.getComments(id));
         model.addAttribute("post", blogPostService.getPost(id));
         return "blogpostDetails";
     }
@@ -185,5 +189,30 @@ public class ArmandoController {
             //blogPostService.deleteBlogPost(id);
 
         //return "deletedBlogpost";
+    }
+
+    //Commenti
+    @GetMapping("/blog/{id}/comment")
+    public String addComment(@PathVariable int id, Model model)
+    {
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("postTitle", blogPostService.getPost(id).getTitle());
+        return "addComment";
+    }
+
+    @PostMapping("/blog/{id}/comment")
+    public String saveComment(@PathVariable int id, @ModelAttribute Comment comment)
+    {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Utente utente = blogPostService.findUserByUsername(user.getUsername());
+
+        BlogPost post = blogPostService.getPost(id);
+
+        comment.setAuthor(utente);
+        comment.setPost(post);
+        comment.setDate(LocalDateTime.now());
+
+        blogPostService.addComment(comment);
+        return "redirect:/blog/"+id;
     }
 }

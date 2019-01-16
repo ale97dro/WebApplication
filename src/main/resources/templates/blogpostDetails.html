@@ -41,6 +41,23 @@
             <a sec:authorize="hasRole('ADMIN')" th:href="@{'/blog/' + ${post.getId()} + '/delete'}">
                 Delete
             </a>
+
+
+            <br><br>
+            <h1>Comments</h1>
+            <br>
+
+            <form sec:authorize="isAuthenticated()" method="get" th:action="@{'/blog/'+${post.getId()}+'/comment'}">
+                <input type="submit" value="Comment"/>
+            </form>
+
+            <ul th:each="comment :${comments}">
+                <li>
+                    <p th:text="${comment.getAuthor().getName()} + ' | '+${comment.getDate()} +' | ' +${comment.getText()} "></p>
+                    <input sec:authorize="isAuthenticated()" type="submit" value="Respond"/>
+                </li>
+            </ul>
+
             <div th:replace="~{master :: footer}"></div>
         </div>
     </body>
