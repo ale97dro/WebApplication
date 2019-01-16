@@ -36,6 +36,10 @@
                 <!--    <input class="form-control" th:field="*{title}" type="text" name="title" />-->
                 </td>
             </tr>
+            <tr th:if="${respond} == 'true'">
+                <td class="field">Comment</td>
+                <td th:text="${commentText}"></td>
+            </tr>
 
             <tr>
                 <td class="field">

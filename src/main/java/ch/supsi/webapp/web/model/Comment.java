@@ -2,6 +2,7 @@ package ch.supsi.webapp.web.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "COMMENT")
@@ -22,6 +23,9 @@ public class Comment
 
     private String text;
     private LocalDateTime date;
+
+    @OneToMany
+    List<Comment> children;
 
     public Comment()
     {
@@ -68,5 +72,13 @@ public class Comment
     public LocalDateTime getDate()
     {
         return date;
+    }
+
+    public List<Comment> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Comment> children) {
+        this.children = children;
     }
 }

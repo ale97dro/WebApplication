@@ -42,7 +42,6 @@
                 Delete
             </a>
 
-
             <br><br>
             <h1>Comments</h1>
             <br>
@@ -51,15 +50,19 @@
                 <input type="submit" value="Comment"/>
             </form>
 
-            <ul th:each="comment :${comments}">
-                <li>
-                    <p th:text="${comment.getAuthor().getName()} + ' | '+${comment.getDate()} +' | ' +${comment.getText()} "></p>
-                    <input sec:authorize="isAuthenticated()" type="submit" value="Respond"/>
-                </li>
-            </ul>
+                <ul th:each="comment :${comments}">
+                    <li>
+                        <p th:text="${comment.getAuthor().getName()} + ' | '+${comment.getDate()} +' | ' +${comment.getText()} "></p>
+
+                        <form sec:authorize="isAuthenticated()" method="get" th:action="@{'/blog/'+${post.getId()}+'/comment'}">
+                            <input sec:authorize="isAuthenticated()" type="submit" value="Respond"/>
+                            <input type="hidden" name="responde" id="responde" value="true">
+                            <input type="hidden" name="commentText" id="commentText" th:value="${comment.getText()}">
+                        </form>
+                    </li>
+                </ul>
 
             <div th:replace="~{master :: footer}"></div>
         </div>
     </body>
-
 </html>

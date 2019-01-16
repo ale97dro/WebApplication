@@ -184,17 +184,15 @@ public class ArmandoController {
 
         model.addAttribute("allPosts", allPosts);
 
-
         return "deletedBlogpost";
-            //blogPostService.deleteBlogPost(id);
-
-        //return "deletedBlogpost";
     }
 
     //Commenti
     @GetMapping("/blog/{id}/comment")
-    public String addComment(@PathVariable int id, Model model)
+    public String addComment(@PathVariable int id, Model model, String respond, String commentText)
     {
+        model.addAttribute("respond", respond);
+        model.addAttribute("commentText", commentText);
         model.addAttribute("comment", new Comment());
         model.addAttribute("postTitle", blogPostService.getPost(id).getTitle());
         return "addComment";
