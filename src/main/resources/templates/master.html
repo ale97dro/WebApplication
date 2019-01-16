@@ -24,6 +24,10 @@
         <li class="navVoice">
             <a class="navFont" th:href="@{'/all'}">See all blogpost</a>
         </li>
+        <li class ="navVoice" sec:authorize="hasRole('ADMIN')">
+            <a class="navFont" th:href="@{'/deleted'}">Deleted blogpost</a>
+        </li>
+
         <li class="navVoice" sec:authorize="isAnonymous()">
             <a class="navFont" th:href="@{'/login'}">Login</a>
         </li>

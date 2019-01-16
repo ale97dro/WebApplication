@@ -27,6 +27,8 @@ public class BlogPost
     private String text;
     private LocalDateTime date;
 
+    private boolean deleted;
+
     public BlogPost()
     {
         //author = new Utente();
@@ -118,5 +120,15 @@ public class BlogPost
     public LocalDateTime getDate()
     {
         return date;
+    }
+
+    public void setDeleted(boolean deleted)
+    {
+        this.deleted = deleted;
+    }
+
+    public boolean getDeleted()
+    {
+        return deleted;
     }
 }

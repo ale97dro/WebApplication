@@ -83,7 +83,16 @@ public class BlogPostService
 
     public List<BlogPost> getAll()
     {
-        return blogPostRepository.findAll();
+        //return blogPostRepository.findAll();
+
+        List<BlogPost> posts = blogPostRepository.findAll();
+        List<BlogPost> returns = new ArrayList<>();
+
+        for(BlogPost p : posts)
+            if(!p.getDeleted())
+                returns.add(p);
+
+        return returns;
     }
 
     public BlogPost getPost(int id)
@@ -98,8 +107,20 @@ public class BlogPostService
         List<BlogPost> temp = blogPostRepository.recentBlogPostFirst();
         List<BlogPost> recent = new ArrayList<>();
 
-        for(int i=0;i<temp.size() && i<3; i++)
-            recent.add(temp.get(i));
+
+        int counter = 0;
+
+//        while(counter <3 && counter<temp.size())
+//            if(temp.get(counter))
+
+        for(int i=0;i<temp.size() && counter<3;i++)
+        {
+            if(!temp.get(i).getDeleted()) {
+                recent.add(temp.get(i));
+                counter++;
+            }
+
+        }
 
         return recent;
     }
@@ -142,7 +163,10 @@ public class BlogPostService
 
         if(optionalPost.isPresent())
         {
-            blogPostRepository.delete(optionalPost.get());
+            //blogPostRepository.delete(optionalPost.get());
+            BlogPost b = optionalPost.get();
+            b.setDeleted(true);
+            blogPostRepository.save(b);
             return "{\"success\": true}";
         }
 
@@ -167,5 +191,12 @@ public class BlogPostService
 
         if(!utenteRepository.findById(utente.getName()).isPresent())
             utenteRepository.save(utente);
+    }
+
+    public List<BlogPost> deletedBlogPost()
+    {
+        List<BlogPost> posts = blogPostRepository.deletedBlogPost();
+
+        return posts;
     }
 }

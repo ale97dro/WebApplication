@@ -12,4 +12,7 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Integer>
 {
     @Query("SELECT b FROM BlogPost b ORDER BY b.date DESC ")
     List<BlogPost> recentBlogPostFirst();
+
+    @Query("SELECT b FROM BlogPost b WHERE b.deleted=true")
+    List<BlogPost> deletedBlogPost();
 }

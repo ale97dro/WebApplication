@@ -110,15 +110,32 @@ public class ArmandoController {
     @GetMapping("/blog/{id}/edit")
     public String getUpdateBlogPost(@PathVariable int id, Model model)
     {
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Utente utente = blogPostService.findUserByUsername(user.getUsername());
+
+
+        //if(utente.getRole().getName().equals("ROLE_ADMIN")) {
+
         BlogPost post = blogPostService.getPost(id);
+
+        if(post.getDeleted())
+        {
+            if(!utente.getRole().getName().equals("ROLE_ADMIN"))
+                return "deletedError";
+
+        }
+
+
         model.addAttribute("newPost", post);
         model.addAttribute("author", post.getAuthor().getName());
         model.addAttribute("allCategory", categoriaRepository.findAll());
-        //model.addAttribute("allAuthor", utenteRepository.findAll());
+    //model.addAttribute("allAuthor", utenteRepository.findAll());
         model.addAttribute("operation", "Edit blogpost");
         model.addAttribute("submitVal", "Edit");
 
         return "createBlogForm";
+
         //questo lo pianto nel model e poi lo visualizzo
     }
 
@@ -152,5 +169,21 @@ public class ArmandoController {
         utente.setRole(new Ruolo("ROLE_USER"));
         blogPostService.addUser(utente);
         return "redirect:/";
+    }
+
+    //POST CANCELLATI
+
+    @GetMapping("/deleted")
+    public String getDeletedPost(Model model)
+    {
+        List<BlogPost> allPosts = blogPostService.deletedBlogPost();
+
+        model.addAttribute("allPosts", allPosts);
+
+
+        return "deletedBlogpost";
+            //blogPostService.deleteBlogPost(id);
+
+        //return "deletedBlogpost";
     }
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Index of blogpost">
+    <meta name="author" content="Alessandro Bianchi">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/common.css'}" media="screen" />
+    <link rel="stylesheet" type="text/css" th:href="@{'/css/index.css'}" media="screen" />
+    <link th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body class="background">
+
+<div class="container">
+
+    <header class="header">
+        <a th:href="@{/}">
+            <img th:src="@{'/icon/logo.jpg'}" alt="logo">
+        </a>
+    </header>
+
+    <div th:replace="~{master :: navBar}"></div>
+
+    <br><br>
+
+    <p>Il post è stato cancellato</p>
+
+    <br>
+
+    <aside class="sidebar">
+        Blogpost
+    </aside>
+
+    <br>
+
+
+    <div th:replace="~{master :: footer}"></div>
+
+</div>
+</body>
+
+</html>
